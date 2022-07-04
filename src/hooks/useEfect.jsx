@@ -46,7 +46,7 @@ const Ejemplo2 = () => {
   });*/
 
   /**
-   * ? Case: 2 Ejecutar solo cuando cambie contador1 o contador2
+   * ? Case: 2 Ejecutar solo cuando cambie contador1 o contador2 solo si esta dentro de usEfect()
    * Cada vez que haya un cambio en contador1 y counter2  se ejecuta lo que diga
    * el useEffect
    * En caso de que cambie contador2 no habra cambios
