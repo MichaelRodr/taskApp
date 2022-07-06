@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Task} from '../../models/task.class';
 import {LEVELS} from '../../models/level.enum';
 import TaskComponent from '../pure/task';
+import TaskForm from '../pure/forms/taskForm';
 
 /* Es el componente padre de (TaskComponent)el cual pasa datos como props a sus componentes hijos (datos primitivo, objetos complejos y funciones)*/
 
@@ -74,6 +75,7 @@ const TaskListComponent = () => {
             </tbody>
           </table>
         </div>
+        <TaskForm></TaskForm>
       </div>
     </div>
   );
