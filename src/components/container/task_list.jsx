@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Task} from '../../models/task.class';
 import {LEVELS} from '../../models/level.enum';
 import TaskComponent from '../pure/task';
@@ -6,16 +6,32 @@ import TaskComponent from '../pure/task';
 /* Es el componente padre de (TaskComponent)el cual pasa datos como props a sus componentes hijos (datos primitivo, objetos complejos y funciones)*/
 
 const TaskListComponent = () => {
-  const defaultTask = new Task(
-    'Example',
-    'Default description',
-    false,
+  const defaultTask1 = new Task(
+    'Example1',
+    'Description1',
+    true,
     LEVELS.NORMAL
+  );
+  const defaultTask2 = new Task(
+    'Example2',
+    'Description2',
+    false,
+    LEVELS.URGENT
+  );
+  const defaultTask3 = new Task(
+    'Example3',
+    'description3',
+    false,
+    LEVELS.BLOCKING
   );
 
   // Estado del componente
-  const [tasks, setTasks] = useState([defaultTask]);
-  const [loading, setLoading] = usetate(true);
+  const [tasks, setTasks] = useState([
+    defaultTask1,
+    defaultTask2,
+    defaultTask3,
+  ]);
+  const [loading, setLoading] = useState(true);
 
   // Control del ciclo de vida del componente
   useEffect(() => {
@@ -31,10 +47,34 @@ const TaskListComponent = () => {
   };
 
   return (
-    <div>
-      <h1>Your Tasks:</h1>
-      {/*Todo Aplicar un for/map para renderizar una lista*/}
-      <TaskComponent task={defaultTask}></TaskComponent>
+    <div className='col-12'>
+      <div class='card'>
+        {/*Card Header (tiltle) */}
+        <div className='card-header p-3'>
+          <h5>Your Tasks:</h5>
+        </div>
+        <div
+          className='card-body'
+          data-mdb-perfect-scrollbar='true'
+          style={{position: 'relative', height: '400px'}}
+        >
+          <table>
+            <thead>
+              <tr>
+                <th scope='col'>Title</th>
+                <th scope='col'>Description</th>
+                <th scope='col'>Priority</th>
+                <th scope='col'>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map((task, index) => {
+                return <TaskComponent key={index} task={task}></TaskComponent>;
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
