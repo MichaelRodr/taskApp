@@ -2,8 +2,9 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Task} from '../../models/task.class';
 import {LEVELS} from '../../models/level.enum';
+import '../../styles/task.scss';
 
-function TaskComponent({task}) {
+function TaskComponent({task, complete, remove}) {
   useEffect(() => {
     console.log('Created Task');
     return () => {
@@ -47,14 +48,16 @@ function TaskComponent({task}) {
     if (task.completed) {
       return (
         <i
-          className='bi-toggle-on'
+          onClick={() => complete(task)}
+          className='bi-toggle-on p-2 task-actions'
           style={{color: 'green', fontSize: '1.2rem'}}
         ></i>
       );
     } else {
       return (
         <i
-          className='bi-toggle-off'
+          onClick={() => complete(task)}
+          className='bi-toggle-off p-2 task-actions'
           style={{color: 'grey', fontSize: '1.2rem'}}
         ></i>
       );
@@ -75,16 +78,23 @@ function TaskComponent({task}) {
       <td className='align-middle'>
         {taskIconCompleted()}
         <i
-          className='bi-trash'
+          onClick={() => remove(task)}
+          className='bi-trash task-actions'
           style={{color: 'tomato', fontSize: '1.2rem'}}
         ></i>
       </td>
     </tr>
   );
 }
-
+/**
+ * ? Las PropsTypes deben ser definidas en el componente que las va a recibir
+ * ?instanceOf indica a que clase pertenece
+ * ? isRequired indica que es de caracter obligatorio
+ */
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
+  task: PropTypes.instanceOf(Task).isRequired,
+  complete: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;
