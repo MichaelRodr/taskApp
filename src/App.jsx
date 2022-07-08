@@ -3,11 +3,13 @@
 /* eslint-disable linebreak-style */
 import './App.css';
 import TaskListComponent from './components/container/task_list';
+import OptionalRender from './components/pure/optionalRender';
 
 function App() {
   return (
     <div>
-      <TaskListComponent></TaskListComponent>;
+      {/*  <TaskListComponent></TaskListComponent>; */}
+      <OptionalRender></OptionalRender>
     </div>
   );
 }
