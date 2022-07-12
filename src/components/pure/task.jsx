@@ -66,7 +66,15 @@ function TaskComponent({task, complete, remove}) {
   return (
     <tr className='fw-normal'>
       <th>
-        <span className='ms-2'>{task.name}</span>
+        <span
+          className={
+            task.completed
+              ? 'task-completed ms-2 align-middle'
+              : 'task-pending ms-2 align-middle'
+          }
+        >
+          {task.name}
+        </span>
       </th>
       <td className='align-middle'>
         <span>{task.description}</span>

@@ -3,7 +3,7 @@ import {Task} from '../../models/task.class';
 import {LEVELS} from '../../models/level.enum';
 import TaskComponent from '../pure/task';
 import TaskForm from '../pure/forms/taskForm';
-
+import {Link} from 'react-router-dom';
 /* Es el componente padre de (TaskComponent)el cual pasa datos como props a sus componentes hijos (datos primitivo, objetos complejos y funciones)*/
 
 const TaskListComponent = () => {
@@ -63,10 +63,48 @@ const TaskListComponent = () => {
 
   function addTask(task) {
     console.log('adding new Task:', task);
-    const index = tasks.indexOf(task);
     const tempTasks = [...tasks];
     tempTasks.push(task);
     setTasks(tempTasks);
+  }
+
+  function Table() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th scope='col'>Title</th>
+            <th scope='col'>Description</th>
+            <th scope='col'>Priority</th>
+            <th scope='col'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task, index) => {
+            return (
+              <TaskComponent
+                key={index}
+                task={task}
+                complete={completeTask}
+                remove={deleteTask}
+              ></TaskComponent>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
+  let taskTable;
+
+  if (tasks.length > 0) {
+    taskTable = <Table></Table>;
+  } else {
+    taskTable = (
+      <div>
+        <h1>There no task show</h1>
+        <h2>Please, create new task</h2>
+      </div>
+    );
   }
 
   return (
@@ -81,28 +119,7 @@ const TaskListComponent = () => {
           data-mdb-perfect-scrollbar='true'
           style={{position: 'relative', height: '400px'}}
         >
-          <table>
-            <thead>
-              <tr>
-                <th scope='col'>Title</th>
-                <th scope='col'>Description</th>
-                <th scope='col'>Priority</th>
-                <th scope='col'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map((task, index) => {
-                return (
-                  <TaskComponent
-                    key={index}
-                    task={task}
-                    complete={completeTask}
-                    remove={deleteTask}
-                  ></TaskComponent>
-                );
-              })}
-            </tbody>
-          </table>
+          {taskTable}
           <TaskForm add={addTask}></TaskForm>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import {useRef} from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import {LEVELS} from '../../../models/level.enum';
-import {Task} from '../../../models/task.class.js';
+import { LEVELS } from '../../../models/level.enum';
+import { Task } from '../../../models/task.class';
 
-const Taskform = ({add, length}) => {
+const Taskform = ({ add, length }) => {
   const nameRef = useRef('');
   const descriptionRef = useRef('');
   const levelRef = useRef(LEVELS.NORMAL);
@@ -13,7 +13,7 @@ const Taskform = ({add, length}) => {
     const newTask = new Task(
       nameRef.current.value,
       descriptionRef.current.value,
-      true,
+      false,
       levelRef.current.value
     );
     add(newTask);

@@ -3,13 +3,15 @@
 /* eslint-disable linebreak-style */
 import './App.css';
 import TaskListComponent from './components/container/task_list';
-import OptionalRender from './components/pure/optionalRender';
+
+import FetchExample from './components/pure/FetchExample';
 
 function App() {
   return (
     <div>
-      {/*  <TaskListComponent></TaskListComponent>; */}
-      <OptionalRender></OptionalRender>
+      {/* <TaskListComponent></TaskListComponent>; */}
+      {/* <Router /> */}
+      <FetchExample/>
     </div>
   );
 }
